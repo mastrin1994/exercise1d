@@ -13,7 +13,10 @@ public class ArrayConverter {
 	 * @throws NullPointerException if the argument is null.
 	 * @throws NumberFormatException if any of the strings does not represent an integer value.
 	 */
-    public int[] convertToInts(String[] strings) {
+	public static int[] convertToInts(String... strings) {
+		if (strings == null || strings.length == 0) {
+        	throw new IllegalArgumentException("Null or empty argument: "+strings);
+        };
         return Arrays.stream(strings).mapToInt(Integer::valueOf).toArray();
     }
 }

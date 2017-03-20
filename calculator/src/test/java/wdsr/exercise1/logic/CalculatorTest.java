@@ -1,6 +1,7 @@
 package wdsr.exercise1.logic;
 
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;		// dodatkowy import do assertThat
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,6 +25,18 @@ public class CalculatorTest {
 		// then
 		assertEquals(values[0], min);
 	}
+
+	@Test
+	public void testMax_shouldReturnTheOnlyValue() {
+		// given
+		int[] values = { -5 };
+		
+		// when
+		int  max = calculator.max(values);
+
+		// then
+		assertThat(max ,is(values[0]));
+	}
 	
 	@Test
 	public void testMin_shouldReturnTheSmallestOfAllValues() {
@@ -37,8 +50,32 @@ public class CalculatorTest {
 		assertEquals(-3, min);
 	}
 	
+	@Test
+	public void testMax_shouldReturnTheBiggestOfAllValues() {
+		// given
+		int[] values = { 2, -3, 5 };
+		
+		// when
+		int max = calculator.max(values);
+		
+		// then
+		assertThat(max ,is(5));
+	}
+	
 	@Test(expected=IllegalArgumentException.class)
 	public void testMin_shouldRaiseAnExceptionForNullArgument() {
+		// given
+		int[] values = null;
+		
+		// when
+		calculator.min(values);
+		
+		// then
+		// empty
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testMax_shouldRaiseAnExceptionForNullArgument() {
 		// given
 		int[] values = null;
 		
@@ -60,4 +97,16 @@ public class CalculatorTest {
 		// then
 		// empty
 	}		
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testMax_shouldRaiseAnExceptionForEmptyArgument() {
+		// given
+		int[] values = {};
+		
+		// when
+		calculator.min(values);
+		
+		// then
+		// empty
+	}
 }
